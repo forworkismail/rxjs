@@ -1,10 +1,14 @@
 const { Observable } = require('rxjs');
 
 const observable = Observable.create((observer) => {
+  try {
     observer.next('Hello World!')
 		observer.next('I am number 2') // next value
-    // observer.error('I am number 3') // throw error
-    observer.complete('I am number 4') // complete
+    observer.next({ name: 'John' }) // next value
+    observer.complete() // complete
+  } catch (error) {
+    observer.error('I am number 3') // throw error
+  }
 })
 
 // subscribing to an observable
