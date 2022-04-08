@@ -1,5 +1,4 @@
 // Subscribe to observables in order as previous completes
-// RxJS v6+
 const { of, concat } = require('rxjs');
 
 concat(
