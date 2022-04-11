@@ -1,24 +1,18 @@
 const { BehaviorSubject } = require('rxjs');
 
-const subject = new BehaviorSubject(0); // 0 is the initial value
+const subject = new BehaviorSubject(123);
 
-subject.subscribe({
-  next: (v) => console.log(`observerA: ${v}`),
-});
+// two new subscribers will get initial value => output: 123, 123
+subject.subscribe(console.log);
+subject.subscribe(console.log);
 
-subject.next(1);
-subject.next(2);
+// two subscribers will get new value => output: 456, 456
+subject.next(456);
 
-subject.subscribe({
-  next: (v) => console.log(`observerB: ${v}`),
-});
+// new subscriber will get latest value (456) => output: 456
+subject.subscribe(console.log);
 
-subject.next(3);
+// all three subscribers will get new value => output: 789, 789, 789
+subject.next(789);
 
-// Logs
-// observerA: 0
-// observerA: 1
-// observerA: 2
-// observerB: 2
-// observerA: 3
-// observerB: 3
+// output: 123, 123, 456, 456, 456, 789, 789, 789
